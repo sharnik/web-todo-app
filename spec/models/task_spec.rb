@@ -29,4 +29,18 @@ describe Task do
     end
   end
 
+  describe '#complete' do
+    let(:task) { Task.new }
+
+    before { task.complete }
+
+    it 'completes the task' do
+      task.closed?.should == true
+    end
+
+    it 'sets the completion time' do
+      (Time.now - task.completed_at).should < 2.seconds
+    end
+  end
+
 end

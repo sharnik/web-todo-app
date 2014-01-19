@@ -4,7 +4,7 @@ describe TasksController do
 
   describe '#index' do
     before do
-      2.times { |k| Task.create(:content => "Task ##{k + 1}") }
+      2.times { |k| FactoryGirl.create(:task, content: "Task ##{k + 1}") }
       get tasks_url, {}, { Accept: 'application/json' }
     end
 
@@ -22,8 +22,9 @@ describe TasksController do
   end
 
   describe '#create' do
+    let(:project){ FactoryGirl.create(:project) }
     before do
-      post tasks_url, {task: {content: 'New task'}}, { Accept: 'application/json' }
+      post tasks_url, {task: {content: 'New task', project_id: project.id}}, { Accept: 'application/json' }
     end
 
     it 'responds with 200 OK' do
@@ -41,7 +42,7 @@ describe TasksController do
   end
 
   describe '#update' do
-    let(:task){ Task.create!(content: 'Old task') }
+    let(:task){ FactoryGirl.create(:task, content: 'Old task') }
 
     before do
       put task_url(task), {task: {content: 'Refubrished task'}}, { Accept: 'application/json' }
@@ -62,7 +63,7 @@ describe TasksController do
   end
 
   describe '#destroy' do
-    let(:task){ Task.create!(content: 'Worthless task') }
+    let(:task){ FactoryGirl.create(:task, content: 'Worthless task') }
 
     before do
       delete task_url(task), {}, { Accept: 'application/json' }

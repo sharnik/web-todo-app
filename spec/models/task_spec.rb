@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Task do
-  let(:task) { Task.new }
+  let(:task) { FactoryGirl.create(:task) }
 
   describe "that is open" do
     it "knows that it's open" do
@@ -30,7 +30,7 @@ describe Task do
   end
 
   describe '#complete' do
-    let(:task) { Task.new }
+    let(:task) { FactoryGirl.create(:task) }
 
     before { task.complete }
 

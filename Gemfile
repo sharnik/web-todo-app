@@ -15,3 +15,4 @@ group :doc do
 end
 
 gem 'rspec-rails', '~> 2.14.1'
+gem 'factory_girl_rails', '~> 4.3.0'

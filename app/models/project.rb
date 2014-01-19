@@ -3,4 +3,7 @@ class Project < ActiveRecord::Base
 
   validates :name, presence: true
 
+  def done?
+    items.where(completed_at: nil).count == 0
+  end
 end

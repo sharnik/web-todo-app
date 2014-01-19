@@ -3,11 +3,12 @@ gem 'rails', '4.0.2'
 gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'jbuilder', '~> 1.2'
+gem 'react-rails', '~> 0.8.0.0'
+gem 'haml', '~> 4.0.5'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -15,4 +16,4 @@ group :doc do
 end
 
 gem 'rspec-rails', '~> 2.14.1'
-gem 'factory_girl_rails', '~> 4.3.0'
+gem 'factory_girl_rails', '~> 4.3.0', group: :test

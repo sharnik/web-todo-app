@@ -2,14 +2,15 @@ class TasksController < ApplicationController
   respond_to :json
 
   def index
-    @tasks = Task.order('id asc')
+    @tasks = Task.order('created_at asc')
     @projects = Project.all
   end
 
   def create
-    @task = Task.create!(task_params)
+    Task.create!(task_params)
+    @tasks = Task.order('created_at asc')
 
-    render action: :show
+    render action: :index
   end
 
   def update

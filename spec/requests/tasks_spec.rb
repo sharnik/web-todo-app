@@ -32,12 +32,12 @@ describe TasksController do
     end
 
     it 'returns task data' do
-      json['id'].should_not be_nil
-      json['content'].should == 'New task'
+      json.first['id'].should_not be_nil
+      json.first['content'].should == 'New task'
     end
 
     it 'should create a record in the database' do
-      Task.find(json['id']).should be_a Task
+      Task.count.should == 1
     end
   end
 

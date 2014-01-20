@@ -46,10 +46,19 @@ var TaskBox = React.createClass({
 
   render: function() {
     return (
-      <div className="task-list well">
-        <h3>This is what you need to do:</h3>
-        <TaskList data={this.state.tasks}/>
-        <TaskForm onTaskSubmit={this.handleTaskSubmit} projects={this.state.projects}/>
+      <div>
+        <div className="span8">
+          <div className="task-list well">
+            <h3>This is what you need to do:</h3>
+            <TaskList data={this.state.tasks}/>
+            <TaskForm onTaskSubmit={this.handleTaskSubmit} projects={this.state.projects} />
+          </div>
+        </div>
+        <div className="span3">
+          <div className="well sidebar-nav project-list">
+            <ProjectList data={this.state.projects} />
+          </div>
+        </div>
       </div>
     );
   }

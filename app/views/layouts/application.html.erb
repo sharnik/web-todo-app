@@ -52,21 +52,7 @@
     </div>
 
     <div class="container">
-        <div class="row">
-          <div class="span8" id='task-content'>
-            <%#<%= bootstrap_flash %>%>
-            <%#<%= yield %>%>
-          </div>
-          <div class="span3">
-            <div class="well sidebar-nav project-list">
-              <ul class="nav nav-list">
-                <li class="nav-header">Projects</li>
-                <% @projects.each do |project| %>
-                  <li><%= link_to project.name, "/path1" %></li>
-                <% end %>
-              </ul>
-            </div><!--/.well -->
-          </div><!--/span-->
+        <div class="row" id='content'>
         </div><!--/row-->
 
     </div> <!-- /container -->

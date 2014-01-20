@@ -7,7 +7,9 @@ WebTodoApp::Application.routes.draw do
       post 'complete'
     end
   end
-  resources :projects, only: [:index, :create]
+  resources :projects, only: [:index, :create] do
+    resources :tasks, only: [:index]
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

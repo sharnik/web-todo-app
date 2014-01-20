@@ -2,7 +2,11 @@ class TasksController < ApplicationController
   respond_to :json
 
   def index
-    @tasks = all_tasks
+    if params[:project_id]
+      @tasks = Project.find(params[:project_id]).items
+    else
+      @tasks = all_tasks
+    end
   end
 
   def create

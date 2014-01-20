@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 var TaskBox = React.createClass({
   getInitialState: function() {
-    return {tasks: [], projects: []};
+    return {tasks: [], projects: [], tasks_url: 'tasks.json'};
   },
 
   loadStuffFromServer: function() {
     $.ajax({
-      url: 'tasks.json',
+      url: this.state.tasks_url,
       dataType: 'json',
       success: function(tasks) {
         this.setState({tasks: tasks});
@@ -29,7 +29,7 @@ var TaskBox = React.createClass({
 
   handleTaskSubmit: function(task) {
     $.ajax({
-      url: this.props.tasks_url,
+      url: 'tasks.json',
       dataType: 'json',
       type: 'POST',
       data: {task: task},
@@ -75,6 +75,10 @@ var TaskBox = React.createClass({
     });
   },
 
+  handleProjectSwitch: function(project) {
+    this.setState({tasks_url: 'projects/' + project.id + '/tasks.json'});
+  },
+
   componentWillMount: function() {
     this.loadStuffFromServer();
     setInterval(this.loadStuffFromServer, this.props.pollInterval);
@@ -97,7 +101,10 @@ var TaskBox = React.createClass({
         </div>
         <div className="span3">
           <div className="well sidebar-nav project-list">
-            <ProjectList data={this.state.projects} />
+            <ProjectList
+              data={this.state.projects}
+              onProjectSwitch={this.handleProjectSwitch}
+            />
             <ProjectForm onProjectSubmit={this.handleProjectSubmit} />
           </div>
         </div>

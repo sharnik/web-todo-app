@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.order('id asc')
+    @projects = Project.all
   end
 
   def create

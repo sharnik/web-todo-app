@@ -4,11 +4,11 @@ gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+gem 'therubyracer', platforms: :ruby
+gem 'less-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'react-rails', '~> 0.8.0.0'
-gem 'haml', '~> 4.0.5'
+gem 'twitter-bootstrap-rails', '~> 2.2.8'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

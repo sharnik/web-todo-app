@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
 React.renderComponent(
-  <TaskBox url='tasks.json' pollInterval={2500} />,
+  <TaskBox tasks_url='tasks.json' project_url='projects.json' pollInterval={2500} />,
   document.getElementById('content')
 );

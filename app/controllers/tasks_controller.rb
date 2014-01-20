@@ -2,13 +2,12 @@ class TasksController < ApplicationController
   respond_to :json
 
   def index
-    @tasks = Task.order('created_at asc')
-    @projects = Project.all
+    @tasks = all_tasks
   end
 
   def create
     Task.create!(task_params)
-    @tasks = Task.order('created_at asc')
+    @tasks = all_tasks
 
     render action: :index
   end
@@ -31,5 +30,9 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:content, :project_id)
+  end
+
+  def all_tasks
+    Task.order('created_at asc').includes(:project)
   end
 end

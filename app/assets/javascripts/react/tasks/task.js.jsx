@@ -2,9 +2,13 @@
 var Task = React.createClass({
   render: function() {
     return (
-      <p className="task">
-        {this.props.children}
-      </p>
+      <div className="checkbox">
+        <label>
+          <input type="checkbox" value="" checked={this.props.completed_at} />
+          {this.props.children}
+          ({this.props.project})
+        </label>
+      </div>
     );
   }
 });

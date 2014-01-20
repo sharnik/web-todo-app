@@ -39,6 +39,30 @@ var TaskBox = React.createClass({
     });
   },
 
+  handleTaskComplete: function(task) {
+    $.ajax({
+      url: 'tasks/' + task.id + '/complete',
+      dataType: 'json',
+      type: 'POST',
+      data: {},
+      success: function(tasks) {
+        this.setState({tasks: tasks});
+      }.bind(this)
+    });
+  },
+
+  handleTaskOpen: function(task) {
+    $.ajax({
+      url: 'tasks/' + task.id + '/open',
+      dataType: 'json',
+      type: 'POST',
+      data: {},
+      success: function(tasks) {
+        this.setState({tasks: tasks});
+      }.bind(this)
+    });
+  },
+
   handleProjectSubmit: function(project) {
     $.ajax({
       url: this.props.project_url,
@@ -62,7 +86,10 @@ var TaskBox = React.createClass({
         <div className="span8">
           <div className="task-list well">
             <h3>This is what you need to do:</h3>
-            <TaskList data={this.state.tasks}/>
+            <TaskList data={this.state.tasks}
+              onTaskComplete={this.handleTaskComplete}
+              onTaskOpen={this.handleTaskOpen}
+            />
             <TaskForm
               onTaskSubmit={this.handleTaskSubmit}
               projects={this.state.projects} />

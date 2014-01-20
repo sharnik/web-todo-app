@@ -19,6 +19,10 @@ describe TasksController do
     it 'returns details of a task' do
       json.first['content'].should == 'Task #1'
     end
+
+    it 'returns project of a task' do
+      json.first['project'].should_not be_nil
+    end
   end
 
   describe '#create' do
@@ -41,44 +45,35 @@ describe TasksController do
     end
   end
 
-  describe '#update' do
-    let(:task){ FactoryGirl.create(:task, content: 'Old task') }
+  describe '#complete' do
+    let(:task){ FactoryGirl.create(:task, completed_at: nil) }
 
     before do
-      put task_url(task), {task: {content: 'Refubrished task'}}, { Accept: 'application/json' }
+      post complete_task_url(task), {}, { Accept: 'application/json' }
     end
 
     it 'responds with 200 OK' do
       response.should be_success
-    end
-
-    it 'returns updated task data' do
-      json['id'].should == task.id
-      json['content'].should == 'Refubrished task'
     end
 
     it 'should update the record in the database' do
-      task.reload.content.should == 'Refubrished task'
+      task.reload.closed?.should == true
     end
   end
 
-  describe '#destroy' do
-    let(:task){ FactoryGirl.create(:task, content: 'Worthless task') }
+  describe '#open' do
+    let(:task){ FactoryGirl.create(:task, completed_at: 3.hours.ago) }
 
     before do
-      delete task_url(task), {}, { Accept: 'application/json' }
+      post open_task_url(task), {}, { Accept: 'application/json' }
     end
 
     it 'responds with 200 OK' do
       response.should be_success
     end
 
-    it 'responds with success information' do
-      json['status'].should == 'ok'
-    end
-
-    it 'should delete the record in the database' do
-      Task.count.should == 0
+    it 'should update the record in the database' do
+      task.reload.open?.should == true
     end
   end
 end

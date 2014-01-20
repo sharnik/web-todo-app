@@ -43,4 +43,18 @@ describe Task do
     end
   end
 
+  describe '#open' do
+    let(:task) { FactoryGirl.create(:task, completed_at: 2.hours.ago) }
+
+    before { task.open }
+
+    it 're-opens the task' do
+      task.open?.should == true
+    end
+
+    it 'sets the completion time to nil' do
+      task.completed_at.should be_nil
+    end
+  end
+
 end

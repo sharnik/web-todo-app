@@ -12,18 +12,18 @@ class TasksController < ApplicationController
     render action: :index
   end
 
-  def update
-    @task = Task.find(params[:id])
-    @task.update!(task_params)
+  def open
+    Task.find(params[:id]).open
+    @tasks = all_tasks
 
-    render action: :show
+    render action: :index
   end
 
-  def destroy
-    @task = Task.find(params[:id])
-    @task.destroy!
+  def complete
+    Task.find(params[:id]).complete
+    @tasks = all_tasks
 
-    render json: {status: :ok}
+    render action: :index
   end
 
   private

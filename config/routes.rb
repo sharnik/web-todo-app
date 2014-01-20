@@ -1,7 +1,12 @@
 WebTodoApp::Application.routes.draw do
 
   root 'tasks#index'
-  resources :tasks, only: [:index, :create, :update, :destroy]
+  resources :tasks, only: [:index, :create] do
+    member do
+      post 'open'
+      post 'complete'
+    end
+  end
   resources :projects, only: [:index, :create]
 
   # The priority is based upon order of creation: first created -> highest priority.
